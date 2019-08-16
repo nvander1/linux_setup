@@ -20,8 +20,26 @@ echo "Downloading RPMs..."
 wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm -O $TEMP_DIR/dbeaver.rpm
 wget https://downloads.slack-edge.com/linux_releases/slack-3.4.2-0.1.fc21.x86_64.rpm -O $TEMP_DIR/slack.rpm
 
+echo "Adding repositories..."
+sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
 echo "Installing packages..."
-sudo dnf install git sbt neovim zsh docker $TEMP_DIR/dbeaver.rpm $TEMP_DIR/slack.rpm
+sudo dnf install \
+    git \
+    tig \
+    sbt \
+    scala \
+    neovim \
+    fontawesome-font \
+    jq \
+    zsh \
+    docker-ce \
+    docker-compose \
+    golang \
+    dep \
+    blueman \
+    $TEMP_DIR/dbeaver.rpm \
+    $TEMP_DIR/slack.rpm
 
 echo "Configuring docker..."
 sudo systemctl start docker.service
